@@ -1,6 +1,6 @@
 package com.dbmsproject.fellowtraveller.services;
 
-import com.dbmsproject.fellowtraveller.model.User;
+import com.dbmsproject.fellowtraveller.models.User;
 
 import com.dbmsproject.fellowtraveller.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> findAll() {
-        return userRepository.getAllUsers();
+        return userRepository.findAll();
     }
 
     public Optional<User> findByID(Long id) {
-        return userRepository.getUserById(id);
+        return userRepository.findById(id);
     }
 
 //    public void InsertUser(User user) {
 //        userRepository.InsertUser(user);
 //    }
 
-    public void saveUser(User user) {
-        userRepository.insertUser(user.getName(), user.getEmail(), user.getPassword(), user.getPhone());
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
 

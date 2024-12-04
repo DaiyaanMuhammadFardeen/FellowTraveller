@@ -1,9 +1,8 @@
-package com.dbmsproject.fellowtraveller.controller;
+package com.dbmsproject.fellowtraveller.controllers;
 
-import com.dbmsproject.fellowtraveller.model.User;
+import com.dbmsproject.fellowtraveller.models.User;
 import com.dbmsproject.fellowtraveller.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +12,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+    private final UserService userService;
 
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     // Get all users
     @GetMapping
@@ -33,8 +35,8 @@ public class UserController {
 
     // Create new user
     @PostMapping
-    public void createUser(@RequestBody User user) {
-        userService.saveUser(user);
+    public User createUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     // Update user
