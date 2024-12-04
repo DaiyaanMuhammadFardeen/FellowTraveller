@@ -25,9 +25,9 @@ public class UserController {
     }
 
     // Get user by username
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        Optional<User> user = userService.findByName(username);
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserByUserId(@PathVariable Long userId) {
+        Optional<User> user = userService.findByID(userId);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -41,18 +41,6 @@ public class UserController {
     @PutMapping("/{id}")
     public void updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         Optional<User> userOptional = userService.findById(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setName(userDetails.getName());
-            user.setEmail(userDetails.getEmail());
-            user.setPassword(userDetails.getPassword());
-            user.setPhone(userDetails.getPhone());
-            userService.saveUser(user);
-        }
-    }
-    @PutMapping("/{name}")
-    public void updateUser(@PathVariable String name, @RequestBody User userDetails) {
-        Optional<User> userOptional = userService.findByName(name);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setName(userDetails.getName());
