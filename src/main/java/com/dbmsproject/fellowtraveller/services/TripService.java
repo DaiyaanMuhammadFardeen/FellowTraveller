@@ -1,6 +1,6 @@
 package com.dbmsproject.fellowtraveller.services;
 
-import com.dbmsproject.fellowtraveller.model.Trip;
+import com.dbmsproject.fellowtraveller.models.Trip;
 import com.dbmsproject.fellowtraveller.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

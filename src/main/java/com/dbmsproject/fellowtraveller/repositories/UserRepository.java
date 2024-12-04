@@ -1,7 +1,7 @@
 package com.dbmsproject.fellowtraveller.repositories;
 
 
-import com.dbmsproject.fellowtraveller.model.User;
+import com.dbmsproject.fellowtraveller.models.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

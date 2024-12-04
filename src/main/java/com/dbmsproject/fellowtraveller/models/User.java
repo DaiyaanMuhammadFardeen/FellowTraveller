@@ -1,4 +1,4 @@
-package com.dbmsproject.fellowtraveller.model;
+package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

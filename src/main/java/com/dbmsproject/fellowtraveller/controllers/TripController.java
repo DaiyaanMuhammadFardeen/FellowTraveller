@@ -1,8 +1,7 @@
-package com.dbmsproject.fellowtraveller.controller;
+package com.dbmsproject.fellowtraveller.controllers;
 
-import com.dbmsproject.fellowtraveller.model.Trip;
+import com.dbmsproject.fellowtraveller.models.Trip;
 import com.dbmsproject.fellowtraveller.services.TripService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

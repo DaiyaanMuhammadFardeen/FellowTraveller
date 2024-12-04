@@ -1,10 +1,9 @@
-package com.dbmsproject.fellowtraveller.model;
+package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.*;
-import com.dbmsproject.fellowtraveller.model.User;
 
 @Entity
 @Table(name = "trips")  // Replace with your actual table name
