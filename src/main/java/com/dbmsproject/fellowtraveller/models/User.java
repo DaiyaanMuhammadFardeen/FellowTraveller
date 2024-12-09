@@ -36,6 +36,10 @@ public class User {
     @Column(columnDefinition = "json")
     private String preferences;
 
+    @Lob
+    @Column(nullable = true, columnDefinition = "MEDIUMBLOB")
+    private byte[] profilePicture;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
