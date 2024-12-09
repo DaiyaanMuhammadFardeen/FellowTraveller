@@ -36,7 +36,7 @@ public class Destination {
     private Double rating;
 
     @Lob
-    @Column(nullable = true, columnDefinition = "MEDIUMBLOB" ) // Allow this to be optional
+    @Column(nullable = true, columnDefinition = "LONGBLOB" ) // Allow this to be optional
     private byte[] coverPhoto;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)

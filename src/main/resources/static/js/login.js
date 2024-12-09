@@ -13,7 +13,7 @@ document.getElementById("login-form").addEventListener("submit", async (event) =
         const user = await response.json();
         alert(`Welcome back, ${user.name}!`);
         localStorage.setItem("currentUser", JSON.stringify(user));
-        window.location.href = "/pages/home.html";
+        window.location.href = "/home";
     } else {
         alert("Invalid email or password!");
     }
