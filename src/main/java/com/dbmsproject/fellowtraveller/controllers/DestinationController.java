@@ -31,12 +31,12 @@ public class DestinationController {
     public List<Destination> searchDestinations(@RequestParam String query) {
         return destinationService.searchDestinations(query);
     }
-    @GetMapping("{destinationId}")
-    public Destination getDestinationById(@RequestParam Long destinationId) {
+    @GetMapping("/{destinationId}")
+    public Destination getDestinationById(@PathVariable Long destinationId) {
         return destinationService.getDestinationById(destinationId);
     }
     @GetMapping("/{destinationId}/reviews")
-    public List<Review> getReviewsByDestinationId(@RequestParam Long destinationId) {
+    public List<Review> getReviewsByDestinationId(@PathVariable Long destinationId) {
         return reviewService.getReviewsByDestinationId(destinationId);
     }
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
