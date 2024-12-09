@@ -1,4 +1,3 @@
-// Get the destinationId from the URL
 const destinationId = window.location.pathname.split('/').pop();
 
 // Function to fetch destination details
@@ -22,6 +21,9 @@ async function fetchDestinationDetails() {
         document.getElementById('destinationRating').innerText = destination.rating
             ? `Rating: ⭐ ${destination.rating.toFixed(1)}`
             : 'Rating: No reviews yet';
+
+        // Add "Book Now" functionality
+        setupBookNowButton(destinationId);
 
         // Fetch and display reviews
         await fetchReviews();
@@ -53,7 +55,7 @@ async function fetchReviews() {
             reviewDiv.classList.add('review');
 
             const reviewer = document.createElement('p');
-            reviewer.innerText = `Reviewer: ${review.reviewerName}`;
+            reviewer.innerText = `Reviewer: ${review.user.name}`;
             reviewDiv.appendChild(reviewer);
 
             const comment = document.createElement('p');
@@ -70,6 +72,15 @@ async function fetchReviews() {
         console.error(error.message);
         alert('Failed to load reviews. Please try again later.');
     }
+}
+
+// Function to set up the "Book Now" button
+function setupBookNowButton(destinationId) {
+    const bookNowButton = document.getElementById('bookNowButton');
+    bookNowButton.addEventListener('click', () => {
+        // Redirect to the booking page
+        window.location.href = `/booking/${destinationId}`;
+    });
 }
 
 // Fetch destination details on page load
