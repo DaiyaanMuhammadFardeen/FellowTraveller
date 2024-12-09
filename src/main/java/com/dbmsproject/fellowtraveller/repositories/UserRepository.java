@@ -48,4 +48,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
                     @Param("phone") String phone);
 
     Optional<User> findByEmail(String email);
+
+    boolean existsByEmail(String email);
 }
