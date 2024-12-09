@@ -28,4 +28,8 @@ public class DestinationService {
     public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
+    public Destination createDestination(Destination destination) {
+        return destinationRepository.save(destination);
+
+    }
 }
