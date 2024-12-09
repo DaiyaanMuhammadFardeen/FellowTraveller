@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface ItineraryRepository extends JpaRepository<Itinerary, Long> {
-    List<Itinerary> findByUser_UserId(Long userId);
 }

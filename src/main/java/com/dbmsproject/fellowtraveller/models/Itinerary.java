@@ -2,6 +2,7 @@ package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,18 +15,13 @@ public class Itinerary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itineraryId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    private String name;
-
     private LocalDate startDate;
 
     private LocalDate endDate;
 
     private BigDecimal totalBudget;
 
+    @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDate createdAt;
 }

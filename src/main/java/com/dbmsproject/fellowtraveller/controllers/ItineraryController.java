@@ -28,10 +28,10 @@ public class ItineraryController {
         URI uri = URI.create("/api/itineraries/" + createdItinerary.getItineraryId());
         return ResponseEntity.created(uri).body(createdItinerary);
     }
-    @GetMapping("/foruser/{userId}")
-    public ResponseEntity<List<Itinerary>> getItineraryByUserId(@PathVariable Long userId) {
-        return ResponseEntity.ok(itineraryService.getItineraryByUserId(userId));
-    }
+//    @GetMapping("/foruser/{userId}")
+//    public ResponseEntity<List<Itinerary>> getItineraryByUserId(@PathVariable Long userId) {
+//        return ResponseEntity.ok(itineraryService.getItineraryByUserId(userId));
+//    }
     @GetMapping("/{itineraryId}")
     public ResponseEntity<Itinerary> getItineraryById(@PathVariable Long itineraryId) {
         return ResponseEntity.ok(itineraryService.getItineraryById(itineraryId));

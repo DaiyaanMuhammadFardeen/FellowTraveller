@@ -19,10 +19,6 @@ public class ItineraryService {
         return itineraryRepository.save(itinerary);
     }
 
-    public List<Itinerary> getItineraryByUserId(Long userId) {
-        return itineraryRepository.findByUser_UserId(userId);
-    }
-
     public Itinerary getItineraryById(Long itineraryId) {
         return itineraryRepository.findById(itineraryId).orElse(null);
     }
