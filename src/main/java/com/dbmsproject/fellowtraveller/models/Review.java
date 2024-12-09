@@ -2,6 +2,7 @@ package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +25,9 @@ public class Review {
 
     private Double rating;
 
+    private String comment;
+
+    @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 }
