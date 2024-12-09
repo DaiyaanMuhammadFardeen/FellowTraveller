@@ -20,23 +20,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Get all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAll();
         return ResponseEntity.ok(users);
     }
 
-    // Get user by username
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserByUserId(@PathVariable Long userId) {
         Optional<User> user = userService.findByID(userId);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Create new user
     @PostMapping("/register")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        if(userService.existsByName(user.getName()) || userService.existsByEmail(user.getEmail())) {
+            ResponseEntity.badRequest().build();
+        }
         User savedUser = userService.saveUser(user);
         URI uri = URI.create("/api/users/" + savedUser.getUserId());
         return ResponseEntity.created(uri).body(savedUser);
@@ -53,7 +53,6 @@ public class UserController {
         }
     }
 
-    // Update user
     @PutMapping("/{userId}")
     public void updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
         Optional<User> userOptional = userService.findById(userId);
@@ -67,7 +66,6 @@ public class UserController {
         }
     }
 
-    // Delete user
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         if (userService.existsById(userId)) {
