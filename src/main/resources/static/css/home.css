@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 24px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.destination-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+}
+
+.destination-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-content {
+    padding: 15px;
+}
+
+.destination-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.destination-location {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+}
+
+.destination-category {
+    font-size: 14px;
+    color: #4CAF50;
+    margin: 5px 0;
+}
+
+.destination-description {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.destination-rating {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFD700;
+    margin-top: 10px;
+}
