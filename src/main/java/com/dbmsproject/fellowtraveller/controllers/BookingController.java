@@ -24,6 +24,10 @@ public class BookingController {
         URI location = URI.create("/api/bookings/" + createdBooking.getBookingId());
         return ResponseEntity.created(location).body(createdBooking);
     }
+    @GetMapping
+    public List<Booking> getAllBookings() {
+        return bookingService.getAllBookings();
+    }
     @GetMapping("/foritinerary/{itineraryId}")
     public List<Booking> getBookingsByItineraryId(Long itineraryId) {
         return bookingService.getBookingsByItineraryId(itineraryId);
@@ -33,7 +37,7 @@ public class BookingController {
         return bookingService.getBookingsByUserId(userId);
     }
     @GetMapping("/{bookingId}")
-    public ResponseEntity<Booking> getBookingById(Long bookingId) {
+    public ResponseEntity<Booking> getBookingById(@PathVariable Long bookingId) {
         return ResponseEntity.ok(bookingService.getBookingById(bookingId));
     }
     @DeleteMapping("/{bookingId}")

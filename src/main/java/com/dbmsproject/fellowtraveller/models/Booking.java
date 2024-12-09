@@ -2,6 +2,7 @@ package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,17 +15,21 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "itinerary_id", nullable = false)
     private Itinerary itinerary;
 
-    private String serviceType;
+    private Long destinationId;
 
-    private String serviceName;
+    private Long userid;
+
+    private String serviceType;
 
     private LocalDate bookingDate;
 
     private BigDecimal cost;
 
-    private String confirmationNumber;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDate createdAt = LocalDate.now();
 }

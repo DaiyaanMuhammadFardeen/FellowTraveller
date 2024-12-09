@@ -24,7 +24,7 @@ public class BookingService {
     }
 
     public List<Booking> getBookingsByUserId(Long userId) {
-        return bookingRepository.findByItinerary_User_UserId(userId);
+        return bookingRepository.findAllByUserid(userId);
     }
 
     public Booking getBookingById(Long bookingId) {
@@ -33,5 +33,9 @@ public class BookingService {
 
     public void deleteBooking(Long bookingId) {
         bookingRepository.deleteById(bookingId);
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
     }
 }
