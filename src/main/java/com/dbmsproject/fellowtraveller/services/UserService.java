@@ -5,6 +5,8 @@ import com.dbmsproject.fellowtraveller.models.User;
 import com.dbmsproject.fellowtraveller.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,7 @@ public class UserService {
 //        userRepository.InsertUser(user);
 //    }
 
-    public User saveUser(User user) {
+    public User saveUser(User user) throws SQLIntegrityConstraintViolationException {
         return userRepository.save(user);
     }
 

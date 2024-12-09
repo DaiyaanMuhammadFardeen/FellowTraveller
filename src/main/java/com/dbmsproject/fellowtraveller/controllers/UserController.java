@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,13 +34,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        if(userService.existsByName(user.getName()) || userService.existsByEmail(user.getEmail())) {
-            ResponseEntity.badRequest().build();
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        try {
+            User savedUser = userService.saveUser(user);
+            URI uri = URI.create("/api/users/" + savedUser.getUserId());
+            return ResponseEntity.created(uri).body(savedUser);
         }
-        User savedUser = userService.saveUser(user);
-        URI uri = URI.create("/api/users/" + savedUser.getUserId());
-        return ResponseEntity.created(uri).body(savedUser);
+        catch (SQLIntegrityConstraintViolationException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/login")
@@ -54,7 +57,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public void updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
+    public void updateUser(@PathVariable Long userId, @RequestBody User userDetails) throws SQLIntegrityConstraintViolationException {
         Optional<User> userOptional = userService.findById(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -85,7 +88,7 @@ public class UserController {
         }
     }
     @PutMapping("/{id}/preferences")
-    public ResponseEntity<User> updatePreferences(@PathVariable Long id, @RequestBody String preferences) {
+    public ResponseEntity<User> updatePreferences(@PathVariable Long id, @RequestBody String preferences) throws SQLIntegrityConstraintViolationException {
         Optional<User> userOptional = userService.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
