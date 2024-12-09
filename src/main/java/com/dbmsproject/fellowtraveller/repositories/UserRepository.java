@@ -47,4 +47,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
                     @Param("password") String password,
                     @Param("phone") String phone);
 
+    Optional<User> findByEmail(String email);
 }
