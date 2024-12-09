@@ -10,6 +10,11 @@ async function fetchDestinations() {
         gridContainer.innerHTML = ''; // Clear existing content
 
         destinations.forEach(destination => {
+            // Create anchor element
+            const destinationLink = document.createElement('a');
+            destinationLink.href = `/destination/${destination.destinationId}`;
+            destinationLink.classList.add('destination-link'); // Add optional styling class
+
             const card = document.createElement('div');
             card.classList.add('destination-card');
 
@@ -53,7 +58,8 @@ async function fetchDestinations() {
             content.appendChild(rating);
 
             card.appendChild(content);
-            gridContainer.appendChild(card);
+            destinationLink.appendChild(card); // Wrap card in anchor
+            gridContainer.appendChild(destinationLink);
         });
     } catch (error) {
         console.error(error.message);
