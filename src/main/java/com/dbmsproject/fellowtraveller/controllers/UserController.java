@@ -42,6 +42,17 @@ public class UserController {
         return ResponseEntity.created(uri).body(savedUser);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        Optional<User> savedUser = userService.findByEmail(user.getEmail());
+        if(savedUser.isPresent() && savedUser.get().getPasswordHash().equals(user.getPasswordHash())) {
+            return ResponseEntity.ok(savedUser.get());
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Update user
     @PutMapping("/{userId}")
     public void updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
