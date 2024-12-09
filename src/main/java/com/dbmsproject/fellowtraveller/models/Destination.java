@@ -2,8 +2,10 @@ package com.dbmsproject.fellowtraveller.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,18 +26,24 @@ public class Destination {
     @Column(nullable = false, length = 100)
     private String category;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double latitude;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double longitude;
 
-    @Column(nullable = false)
-    private String imageUrl;
-
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double rating;
 
+    @Lob
+    @Column(nullable = true, columnDefinition = "MEDIUMBLOB" ) // Allow this to be optional
+    private byte[] coverPhoto;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(nullable = true)
+    private List<Review> reviews;
+
+    @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
