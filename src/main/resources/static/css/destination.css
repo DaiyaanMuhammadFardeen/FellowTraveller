@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: #007BFF;
+    color: white;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#destinationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#destinationImage {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#destinationDetails {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+#reviewsContainer {
+    margin-top: 20px;
+}
+
+.review {
+    background: #f1f1f1;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
