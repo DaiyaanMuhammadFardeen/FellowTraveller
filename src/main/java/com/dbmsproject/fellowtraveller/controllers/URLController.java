@@ -34,4 +34,8 @@ public class URLController {
     public String destinationDetails() {
         return "forward:/pages/destinationPage.html"; // Maps /destination/{destinationId} to /pages/destination.html
     }
+    @GetMapping("/booking/{destinationId}")
+    public String bookingPage() {
+        return "forward:/pages/booking.html"; // Maps /booking/{destinationId} to /pages/booking.html
+    }
 }
