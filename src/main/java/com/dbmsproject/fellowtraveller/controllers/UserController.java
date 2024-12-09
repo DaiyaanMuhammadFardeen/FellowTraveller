@@ -2,10 +2,13 @@ package com.dbmsproject.fellowtraveller.controllers;
 
 import com.dbmsproject.fellowtraveller.models.User;
 import com.dbmsproject.fellowtraveller.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -55,18 +58,29 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
     @PutMapping("/{userId}")
-    public void updateUser(@PathVariable Long userId, @RequestBody User userDetails) throws SQLIntegrityConstraintViolationException {
-        Optional<User> userOptional = userService.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setName(userDetails.getName());
-            user.setEmail(userDetails.getEmail());
-            user.setPasswordHash(userDetails.getPasswordHash());
-            user.setPhone(userDetails.getPhone());
-            userService.saveUser(user);
+    public ResponseEntity<User> updateUser(
+            @PathVariable Long userId,
+            @RequestPart("user") String userJson,
+            @RequestPart(value = "profilePicture", required = false) MultipartFile profilePicture) throws IOException, SQLIntegrityConstraintViolationException {
+        Optional<User> existingUser = userService.findByID(userId);
+        if (existingUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        User updatedUser = objectMapper.readValue(userJson, User.class);
+
+        existingUser.get().setName(updatedUser.getName());
+        existingUser.get().setEmail(updatedUser.getEmail());
+        existingUser.get().setPhone(updatedUser.getPhone());
+        existingUser.get().setPreferences(updatedUser.getPreferences());
+
+        if (profilePicture != null && !profilePicture.isEmpty()) {
+            existingUser.get().setProfilePicture(profilePicture.getBytes());
+        }
+        userService.saveUser(existingUser.orElse(null));
+        return ResponseEntity.ok(existingUser.get());
     }
 
     @DeleteMapping("/{userId}")
@@ -89,11 +103,10 @@ public class UserController {
     }
     @PutMapping("/{id}/preferences")
     public ResponseEntity<User> updatePreferences(@PathVariable Long id, @RequestBody String preferences) throws SQLIntegrityConstraintViolationException {
-        Optional<User> userOptional = userService.findById(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setPreferences(preferences);
-            User updatedUser = userService.saveUser(user);
+        User existingUser = userService.findById(id);
+        if (existingUser != null) {
+            existingUser.setPreferences(preferences);
+            User updatedUser = userService.saveUser(existingUser);
             return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
