@@ -51,6 +51,7 @@ async function updateUserSettings() {
 
         alert("User settings updated successfully!");
         fetchUserDetails(); // Refresh details
+        window.location.href = "/home";
     } catch (error) {
         document.getElementById("errorMessage").innerText = error.message;
     }

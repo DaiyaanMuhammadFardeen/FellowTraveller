@@ -17,7 +17,7 @@ public class ReviewController {
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
-    @PostMapping
+    @PostMapping("/submitreview")
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
         Review createdReview = reviewService.createReview(review);
         URI location = URI.create("/api/reviews/" + createdReview.getReviewId());

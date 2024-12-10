@@ -66,6 +66,29 @@ async function fetchDestinations() {
         alert('Failed to load destinations. Please try again later.');
     }
 }
+async function showNavbar() {
+    try {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            const profileImage = document.getElementById('profile-picture');
+
+            if (currentUser.profilePicture && currentUser.profilePicture.startsWith("data:image")) {
+                profileImage.src = currentUser.profilePicture;
+            } else {
+                profileImage.src = 'https://via.placeholder.com/50x50?text=No+Image';
+            }
+
+            const welcomeMessage = document.getElementById('welcome');
+            welcomeMessage.innerText = `Welcome, ${currentUser.name}!`;
+        } else {
+            console.error("User not found in localStorage");
+        }
+    } catch (error) {
+        console.error("Error showing navbar:", error.message);
+    }
+}
+showNavbar();
+
 
 // Fetch destinations on page load
 fetchDestinations();

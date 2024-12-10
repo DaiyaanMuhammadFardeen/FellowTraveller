@@ -27,6 +27,9 @@ async function fetchDestinationDetails() {
 
         // Fetch and display reviews
         await fetchReviews();
+
+        // Add event listener for the "Give a Review" button
+        setupGiveReviewButton(destinationId);
     } catch (error) {
         console.error(error.message);
         alert('Failed to load destination details. Please try again later.');
@@ -80,6 +83,15 @@ function setupBookNowButton(destinationId) {
     bookNowButton.addEventListener('click', () => {
         // Redirect to the booking page
         window.location.href = `/booking/${destinationId}`;
+    });
+}
+
+// Function to set up the "Give a Review" button
+function setupGiveReviewButton(destinationId) {
+    const giveReviewButton = document.getElementById('giveReviewButton');
+    giveReviewButton.addEventListener('click', () => {
+        // Redirect to the review form page
+        window.location.href = `/destinations/${destinationId}/review`;
     });
 }
 
